@@ -5,45 +5,11 @@ import java.awt.*;
 import java.io.*;
 
 public class Graph {
-	// PARSING VARIALBLES=====================================
-	// Tags used for XML like export of graph objects
-	final public static String startTag = "<graph>";
-	final public static String endTag = "</graph>";
-
-	final public static String XMLCommentTag = "<!--";
-	final public static String XMLCommentEndTag = "-->";
-
-	final public static String XMLBackgroundImageStartTag = "<image>";
-	final public static String XMLBackgroundImageEndTag = "</image>";
-	final public static String XMLFileNameStartTag = "<filename>";
-	final public static String XMLFileNameEndTag = "</filename>";
-	final public static String XMLDimensionsStartTag = "<dimensions>";
-	final public static String XMLDimensionsEndTag = "</dimensions>";
-
-	public static String[] propertyTagPairs = { XMLCommentTag, XMLCommentEndTag, XMLBackgroundImageStartTag,
-			XMLBackgroundImageEndTag, XMLFileNameStartTag, XMLFileNameEndTag, XMLDimensionsStartTag,
-			XMLDimensionsEndTag };
-	public static String[] singletonPropertyTags = {};
-
-	// Colors for selected and marked items
-	public static Color NORMAL_COLOR = new Color(220, 220, 220); // light gray
-	public static Color NORMAL_EDGE_COLOR = new Color(66, 66, 66); // gray
-
-	public static Color SELECTED_COLOR = Color.red;
-	public static Color MARKED_COLOR = new Color(100, 149, 237); // cornflower
-																	// blue
-
 	// This is the main data structure that represents an undirected graph
 	// These are the instance variables
 
 	private ArrayList<Node> nodes; // The nodes of the graph
 	private ArrayList<Edge> edges; // The edges of the graph
-
-	// info about background image that accompanies graph
-	// (some graphs are models based on a background images, like a map)
-	private String backgroundImageFileName = null;
-	private int backgroundImageWidth = -1;
-	private int backgroundImageHeight = -1;
 
 	private GraphEditor owner = null; // editor which is currently editing this graph
 
@@ -52,9 +18,19 @@ public class Graph {
 	// Global Values to be used by sub-graph enumeration algorithms
 
 	public static enum PathFindingMethod {
-		Dijkstra, AStarLowerBound, AStarManhattan, AStarZeroCostHeuristic, AStarBestFirstGreedy, GreedyBestNeighbour
+		Dijkstra, AStarLowerBound, AStarManhattan, 
+		AStarZeroCostHeuristic, AStarBestFirstGreedy, GreedyBestNeighbour
 	}
+	/////////////////////////////////////////////////////////////////////////////////////////
+	//GETTERS AND SETTER/////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+	public ArrayList<Node> getNodes() { return nodes;}
 
+	/////////////////////////////////////////////////////////////////////////////////////////
+	//Basic Helper Functions/////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////
+	
+	/////////////////////////////////////////////////////////////////////////////////////////
 	public static String nameOfMethod(PathFindingMethod aPathFindingMethod) {
 		if (aPathFindingMethod == PathFindingMethod.Dijkstra)
 			return "Dijkstra";
@@ -93,13 +69,8 @@ public class Graph {
 		return Double.POSITIVE_INFINITY;
 	}
 
-	public void setBackgroundImageInfo(String anImageFileName, int width, int height) {
-		backgroundImageFileName = anImageFileName;
-		backgroundImageWidth = width;
-		backgroundImageHeight = height;
-	}
 
-	public ArrayList<Node> getNodes() { return nodes;}
+
 
 	// number the nodes with integers beginning with start
 	public void numberNodesFrom(int start) {
@@ -1253,4 +1224,49 @@ public class Graph {
 		}
 		return thePath;
 	}
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//Drawing /////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// Colors for selected and marked items
+	public static Color NORMAL_COLOR = new Color(220, 220, 220); // light gray
+	public static Color NORMAL_EDGE_COLOR = new Color(66, 66, 66); // gray
+
+	public static Color SELECTED_COLOR = Color.red;
+	public static Color MARKED_COLOR = new Color(100, 149, 237);
+													
+	// info about background image that accompanies graph
+	// (some graphs are models based on a background images, like a map)
+	private String backgroundImageFileName = null;
+	private int backgroundImageWidth = -1;
+	private int backgroundImageHeight = -1;
+	
+	public void setBackgroundImageInfo(String anImageFileName, int width, int height) {
+		backgroundImageFileName = anImageFileName;
+		backgroundImageWidth = width;
+		backgroundImageHeight = height;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//XML Parsing and Writing /////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// PARSING VARIALBLES=====================================
+	// Tags used for XML like export of graph objects
+	final public static String startTag = "<graph>";
+	final public static String endTag = "</graph>";
+
+	final public static String XMLCommentTag = "<!--";
+	final public static String XMLCommentEndTag = "-->";
+
+	final public static String XMLBackgroundImageStartTag = "<image>";
+	final public static String XMLBackgroundImageEndTag = "</image>";
+	final public static String XMLFileNameStartTag = "<filename>";
+	final public static String XMLFileNameEndTag = "</filename>";
+	final public static String XMLDimensionsStartTag = "<dimensions>";
+	final public static String XMLDimensionsEndTag = "</dimensions>";
+
+	public static String[] propertyTagPairs = { XMLCommentTag, XMLCommentEndTag, XMLBackgroundImageStartTag,
+			XMLBackgroundImageEndTag, XMLFileNameStartTag, XMLFileNameEndTag, XMLDimensionsStartTag,
+			XMLDimensionsEndTag };
+	public static String[] singletonPropertyTags = {};
+
 }
