@@ -122,7 +122,7 @@ public class GraphEditorMain {
 		//Confirm whether path reached from source to target.
 		Node currentNode = source;
 		for(Edge e: stPath){
-			currentNode = e.otherEndFrom(currentNode);
+			currentNode = e.otherNode(currentNode);
 		}
 		if(currentNode == target)
 			System.out.println("CONFIRM: target node reached");

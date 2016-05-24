@@ -184,7 +184,7 @@ public class Graph {
 	public void deleteNode(Node aNode) {
 		// Remove the opposite node's incident edges
 		for (Edge anEdge : aNode.incidentEdges()) {
-			anEdge.otherEndFrom(aNode).deleteIncidentEdge(anEdge);
+			anEdge.otherNode(aNode).deleteIncidentEdge(anEdge);
 			edges.remove(anEdge);
 		}
 		// Remove the node now
@@ -411,7 +411,8 @@ public class Graph {
 	}
 
 	public void findMinimumCostSpanningTree(ArrayList<Node> processedNodes, ArrayList<Node> remainingNodes) {
-		// Recursive implementation of Prim-Jarnik Algorithm
+		System.err.println("NOT IMPLEMENTED");
+		/*// Recursive implementation of Prim-Jarnik Algorithm
 		// Find a minimum cost spanning tree recursively by finding the lowest
 		// cost edge
 		// that connects the partial tree represened by the processed nodes to
@@ -428,7 +429,7 @@ public class Graph {
 		if (crossEdges.size() < 1)
 			return; // graph is disconnected
 
-		Edge minimumCostEdge = Edge.removeMinimumWeightEdge(crossEdges); // good
+		//Edge minimumCostEdge = Edge.removeMinimumWeightEdge(crossEdges); // good
 																			// place
 																			// for
 																			// priority
@@ -448,6 +449,7 @@ public class Graph {
 		}
 
 		findMinimumCostSpanningTree(processedNodes, remainingNodes); // recurse
+	*/
 	}
 
 	// CONNECTIVITY AND TRAVERSAL
@@ -969,7 +971,7 @@ public class Graph {
 		while (someNode != source) {
 			Edge pathEdge = someNode.getPreviousEdge();
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}
@@ -1030,7 +1032,7 @@ public class Graph {
 			Edge pathEdge = someNode.getPreviousEdge();
 			pathEdge.setSelected(true);
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}
@@ -1090,7 +1092,7 @@ public class Graph {
 			Edge pathEdge = someNode.getPreviousEdge();
 			pathEdge.setSelected(true);
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}
@@ -1157,7 +1159,7 @@ public class Graph {
 			Edge pathEdge = someNode.getPreviousEdge();
 			pathEdge.setSelected(true);
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}
@@ -1202,7 +1204,7 @@ public class Graph {
 			Edge pathEdge = someNode.getPreviousEdge();
 			pathEdge.setSelected(true);
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}
@@ -1247,7 +1249,7 @@ public class Graph {
 			Edge pathEdge = someNode.getPreviousEdge();
 			pathEdge.setSelected(true);
 			thePath.add(0, pathEdge); // prepend the edge to the path
-			someNode = pathEdge.otherEndFrom(someNode);
+			someNode = pathEdge.otherNode(someNode);
 		}
 		return thePath;
 	}

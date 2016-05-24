@@ -174,7 +174,7 @@ public class Node {
 
 		Iterator<Edge>    edges = incidentEdges.iterator();
 		while(edges.hasNext())
-			if ( edges.next().otherEndFrom(this) == aNode) return true;
+			if ( edges.next().otherNode(this) == aNode) return true;
 
 		return false;
 	}
@@ -190,7 +190,7 @@ public class Node {
 
 		Iterator<Edge>    edges = incidentEdges.iterator();
 		while(edges.hasNext())
-			result.add(edges.next().otherEndFrom(this));
+			result.add(edges.next().otherNode(this));
 		return result;
 	}
 
